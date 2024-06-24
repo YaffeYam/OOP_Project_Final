@@ -1,0 +1,82 @@
+<!-- http://127.0.0.1:5500 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Store</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-primary mr-2">Homepage</a>
+        <a href="/login_view" class="btn btn-success mr-2">Login</a>
+        <a href="/register_view" class="btn btn-info mr-2">Register</a>
+        <a href="/store_view" class="btn btn-warning">Games Collection</a>
+    </div>
+
+    <h1>Welcome</h1>
+    <!-- <div id="msg"></div>
+    <h1><u>User Registration</u></h1>
+    Email: <input id="userEmail"> <br>
+    Username: <input id="userUserName"> <br>
+    Password: <input id="userPassword"><br>
+    <button onclick="addNewUser()">Register</button> <br><br> -->
+
+    <div id="display"></div>
+    <script>
+        const SERVER = "http://127.0.0.1:5000"
+
+        let usersArray = []
+        const getData = async () => {
+            res = await axios.get("http://127.0.0.1:5000")
+            usersArray = res.data
+            console.table(usersArray);
+            buildGUI()
+        }
+
+        const addNewUser = () => {
+            axios.post(SERVER + "/new", {
+                userEmail: userEmail.value,
+                userUserName: userUserName.value,
+                userPassword: userPassword.value
+            }).then(res => msg.innerHTML = "DONE")
+        }
+
+        const deleteUser = (id) => {
+            // console.log("User " + id + " deleted");
+            axios.delete(SERVER + "/del/" + id)
+            buildGUI()
+        }
+
+        const updateUser = (id) => {
+            // console.log("User " + id + " updated");
+            axios.put(SERVER + "/upd/" + id, {
+                userEmail: userEmail.value,
+                userUserName: userUserName.value,
+                userPassword: userPassword.value
+            })
+            buildGUI()
+        }
+
+        const buildGUI = () => {
+            display.innerHTML = usersArray.map(userInArray =>
+            `<div>
+                Email: ${userInArray.userEmail} <br>
+                Username: ${userInArray.userUserName} <br>
+                Password: ${userInArray.userPassword} <br>
+                <button onclick='deleteUser(${userInArray.id})'>Delete User</button>
+                <button onclick='updateUser(${userInArray.id})'>Update User</button> <br><br>
+            </div>` ).join("")
+        }
+
+        getData()
+
+    </script>
+</body>
+
+</html>

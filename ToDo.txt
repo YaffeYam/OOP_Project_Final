@@ -1,0 +1,16 @@
+Admin User:
+Work:
+* Login
+* Register
+* Add game
+* View store
+* Change game price
+* Exit
+* log out
+* Remove game
+
+
+No work:
+* Update game
+* Delete account
+* Change stock

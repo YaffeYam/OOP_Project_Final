@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center"><u>Admin Profile</u></h1>
+                <p>Welcome, {{ user.first_name }} {{ user.last_name }}!</p>
+                <p>Username: {{ user.username }}</p>
+                <a href="/" class="btn btn-primary">Home</a>
+                <a href="/users" class="btn btn-warning">View Users</a>
+                <a href="/store_view" class="btn btn-danger">Manage Store</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
